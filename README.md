@@ -787,16 +787,43 @@ python manage.py migrate
 
 ## 👨‍💻 Author
 
-**Your Name**
-- GitHub: [@yourusername](https://github.com/yourusername)
-- LinkedIn: [Your Profile](https://linkedin.com/in/yourprofile)
-- Email: your.email@example.com
+<div align="center">
+
+### **Mumtaz Ali**
+
+[![GitHub](https://img.shields.io/badge/GitHub-engrmumtazali0112-181717?style=for-the-badge&logo=github)](https://github.com/engrmumtazali0112)
+[![Email](https://img.shields.io/badge/Email-engrmumtazali01@gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:engrmumtazali01@gmail.com)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/mumtazali12)
+
+**Full-Stack Developer | Fitness Enthusiast | Open Source Contributor**
+
+</div>
 
 ---
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+MIT License
+
+Copyright (c) 2025 Mumtaz Ali
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
 ---
 
@@ -810,8 +837,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 <div align="center">
 
-**⭐ Star this repository if you found it helpful!**
+### ⭐ Star this repo if you find it helpful!
 
-Made with ❤️ using Django REST Framework
+**Made with ❤️ and ☕ by Mumtaz Ali**
+
+[![GitHub followers](https://img.shields.io/github/followers/engrmumtazali0112?style=social)](https://github.com/engrmumtazali0112)
+[![GitHub stars](https://img.shields.io/github/stars/engrmumtazali0112/mini-cms-api?style=social)](https://github.com/engrmumtazali0112/mini-cms-api)
 
 </div>
