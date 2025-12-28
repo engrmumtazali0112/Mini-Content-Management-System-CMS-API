@@ -1,15 +1,14 @@
 """
-articles/views.py
+articles/views.py - COMPLETE FIX
 """
-from accounts.serializers import UserSerializer
 from rest_framework import viewsets, status, filters
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 from django_filters.rest_framework import DjangoFilterBackend
-from django.db.models import Prefetch
+from django.db.models import Prefetch, Q
 from .models import Category, Article
-from articles.serializers import (
+from .serializers import (
     CategorySerializer, ArticleListSerializer, 
     ArticleDetailSerializer, ArticleCreateUpdateSerializer
 )
@@ -42,8 +41,10 @@ class ArticleViewSet(viewsets.ModelViewSet):
     """
     ViewSet for managing articles.
     - Public users can only view published articles
-    - Authors can create and edit their own articles
+    - Authors can create and edit their own articles (any status)
     - Admins can edit any article
+    
+    CRITICAL FIX: Authors must be able to access their own articles regardless of status.
     """
     permission_classes = [IsAuthenticatedOrReadOnly, IsAuthorOrAdmin]
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
@@ -55,27 +56,30 @@ class ArticleViewSet(viewsets.ModelViewSet):
     
     def get_queryset(self):
         """
-        Optimize queries and filter based on user permissions
+        SIMPLIFIED FILTERING LOGIC:
+        
+        1. Unauthenticated users → Only published articles
+        2. Admin users → All articles
+        3. Authors → Their own articles (ANY status) + published articles by others
+        
+        This applies to ALL actions (list, retrieve, update, delete).
         """
         queryset = Article.objects.select_related('author', 'category')
-        
         user = self.request.user
         
-        # Public users and non-authenticated users only see published articles
+        # Case 1: Unauthenticated users
         if not user.is_authenticated:
             return queryset.filter(status='published')
         
-        # Admins see all articles
+        # Case 2: Admin users
         if user.is_admin:
             return queryset
         
-        # Authors see their own articles (all statuses) and published articles by others
-        if user.is_author:
-            from django.db.models import Q
-            return queryset.filter(Q(author=user) | Q(status='published'))
-        
-        # Default: only published articles
-        return queryset.filter(status='published')
+        # Case 3: Regular authenticated users (authors)
+        # They can access:
+        # - All their own articles (draft or published)
+        # - Published articles by other authors
+        return queryset.filter(Q(author=user) | Q(status='published')).distinct()
     
     def get_serializer_class(self):
         """
@@ -106,32 +110,21 @@ class ArticleViewSet(viewsets.ModelViewSet):
     def perform_update(self, serializer):
         """
         Ensure authors can only update their own articles
+        (Permission is already checked by IsAuthorOrAdmin)
         """
-        article = self.get_object()
-        user = self.request.user
-        
-        if article.author != user and not user.is_admin:
-            from rest_framework.exceptions import PermissionDenied
-            raise PermissionDenied("You can only edit your own articles.")
-        
         serializer.save()
     
     def perform_destroy(self, instance):
         """
         Ensure authors can only delete their own articles
+        (Permission is already checked by IsAuthorOrAdmin)
         """
-        user = self.request.user
-        
-        if instance.author != user and not user.is_admin:
-            from rest_framework.exceptions import PermissionDenied
-            raise PermissionDenied("You can only delete your own articles.")
-        
         instance.delete()
     
     @action(detail=False, methods=['get'], permission_classes=[IsAuthenticated])
     def my_articles(self, request):
         """
-        Get all articles by the current user
+        Get all articles by the current user (both draft and published)
         """
         queryset = self.get_queryset().filter(author=request.user)
         page = self.paginate_queryset(queryset)
@@ -146,7 +139,7 @@ class ArticleViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=['get'])
     def published(self, request):
         """
-        Get all published articles
+        Get all published articles (public endpoint)
         """
         queryset = self.get_queryset().filter(status='published')
         page = self.paginate_queryset(queryset)
@@ -161,7 +154,10 @@ class ArticleViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=['get'])
     def drafts(self, request):
         """
-        Get all draft articles (only for authenticated users)
+        Get draft articles
+        - Authors: see only their own drafts
+        - Admins: see all drafts
+        - Unauthenticated: 401 error
         """
         if not request.user.is_authenticated:
             return Response(
@@ -182,7 +178,3 @@ class ArticleViewSet(viewsets.ModelViewSet):
         
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
-
-
-
-

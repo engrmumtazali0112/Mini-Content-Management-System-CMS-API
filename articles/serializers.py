@@ -1,6 +1,6 @@
-
 """
-articles/serializers.py
+articles/serializers.py - Make sure this matches exactly
+The issue might be that ArticleCreateUpdateSerializer doesn't return the ID
 """
 from rest_framework import serializers
 from django.utils.text import slugify
@@ -46,9 +46,11 @@ class ArticleDetailSerializer(serializers.ModelSerializer):
         read_only_fields = ['id', 'slug', 'author', 'views_count', 'created_at', 'updated_at']
 
 class ArticleCreateUpdateSerializer(serializers.ModelSerializer):
+    # CRITICAL: Add id to fields so it's returned in response
     class Meta:
         model = Article
-        fields = ['title', 'description', 'content', 'category', 'status', 'featured_image']
+        fields = ['id', 'title', 'slug', 'description', 'content', 'category', 'status', 'featured_image']
+        read_only_fields = ['id', 'slug']  # Make sure id and slug are read-only
     
     def create(self, validated_data):
         validated_data['slug'] = slugify(validated_data['title'])
@@ -65,3 +67,12 @@ class ArticleCreateUpdateSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Category is required.")
         return value
 
+    def to_representation(self, instance):
+        """
+        Override to return full representation after create/update
+        This ensures the response includes all fields including the ID
+        """
+        representation = super().to_representation(instance)
+        # Ensure id is always in the response
+        representation['id'] = instance.id
+        return representation
