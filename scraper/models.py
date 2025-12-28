@@ -1,5 +1,5 @@
 """
-scraper/models.py
+scraper/models.py - FIXED VERSION
 """
 from django.db import models
 
@@ -11,7 +11,8 @@ class ScrapedArticle(models.Model):
     scraped_at = models.DateTimeField(auto_now_add=True)
     
     class Meta:
-        db_table = 'scraped_articles'
+        # REMOVE OR COMMENT THIS LINE - Let Django use default table name
+        # db_table = 'scraped_articles'
         ordering = ['-scraped_at']
     
     def __str__(self):
