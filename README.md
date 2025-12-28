@@ -1,68 +1,167 @@
-# Mini Content Management System (CMS) API
+# 🚀 Mini Content Management System (CMS) API
 
-A robust REST API built with Django REST Framework and PostgreSQL for managing articles, categories, and users with JWT authentication.
+<div align="center">
 
-## 🚀 Features
+![Django](https://img.shields.io/badge/Django-4.2.7-092E20?style=for-the-badge&logo=django&logoColor=white)
+![DRF](https://img.shields.io/badge/Django%20REST-3.14.0-ff1709?style=for-the-badge&logo=django&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-12+-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![JWT](https://img.shields.io/badge/JWT-Authentication-000000?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white)
 
-- **JWT Authentication**: Secure token-based authentication
-- **Role-Based Access Control**: Admin and Author roles with specific permissions
-- **Article Management**: Full CRUD operations with draft/published status
-- **Category Management**: Organized content categorization
-- **Web Scraping**: Automated article scraping from popular tech blogs
-- **Pagination**: Efficient data loading with customizable page sizes
-- **Filtering & Search**: Advanced filtering and search capabilities
-- **API Documentation**: Interactive Swagger/OpenAPI documentation
-- **Optimized Queries**: No N+1 query issues with select_related and prefetch_related
+**A robust, production-ready REST API built with Django REST Framework**
 
-## 📋 Requirements
+[Features](#-features) • [Quick Start](#-quick-start) • [API Documentation](#-api-endpoints) • [Assessment](#-assessment-validation) • [Architecture](#-architecture)
 
-- Python 3.8+
-- PostgreSQL 12+
-- pip (Python package manager)
+</div>
 
-## 🛠️ Installation
+---
 
-### 1. Clone the Repository
+## 📋 Table of Contents
+
+- [Overview](#-overview)
+- [Features](#-features)
+- [Tech Stack](#-tech-stack)
+- [Prerequisites](#-prerequisites)
+- [Installation](#-installation)
+- [API Endpoints](#-api-endpoints)
+- [Assessment Validation](#-assessment-validation)
+- [Database Schema](#-database-schema)
+- [Authentication](#-authentication)
+- [Permissions](#-permissions)
+- [Testing](#-testing)
+- [Deployment](#-deployment)
+
+---
+
+## 🎯 Overview
+
+Mini CMS is a feature-rich Content Management System API designed for managing articles, categories, and users with role-based access control. Built following Django REST Framework best practices, it provides secure JWT authentication, optimized database queries, and comprehensive API documentation.
+
+### Backend Engineering Assessment
+
+This project fulfills all requirements of the Backend Engineering Test Assignment:
+- ✅ JWT-based authentication with Admin/Author roles
+- ✅ Complete Category & Article CRUD operations
+- ✅ Role-based permissions and access control
+- ✅ PostgreSQL database with optimized queries
+- ✅ Pagination and filtering capabilities
+- ✅ Web scraping bonus feature
+- ✅ Clean architecture and error handling
+- ✅ Interactive API documentation (Swagger/ReDoc)
+
+---
+
+## ✨ Features
+
+### 🔐 Authentication & Authorization
+- **JWT Token-Based Authentication** - Secure access with refresh tokens
+- **Role-Based Access Control** - Admin and Author roles with specific permissions
+- **User Profile Management** - Update profile, change password, secure logout
+
+### 📝 Article Management
+- **Full CRUD Operations** - Create, Read, Update, Delete articles
+- **Draft/Published Status** - Control article visibility
+- **Author Ownership** - Authors can only edit their own articles
+- **View Counter** - Track article popularity
+- **Rich Content** - Title, description, content, featured images
+- **Advanced Filtering** - Filter by status, category, author, date range
+- **Search Functionality** - Full-text search across title, description, content
+
+### 🗂️ Category Management
+- **Admin-Only Control** - Secure category management
+- **Auto-Generated Slugs** - SEO-friendly URLs
+- **Article Counting** - Track published articles per category
+
+### 🌐 Web Scraping (Bonus)
+- **Automated Article Scraping** - Fetch latest tech articles
+- **Database Integration** - Store scraped content
+- **Admin-Only Access** - Secure scraping operations
+
+### 🎨 API Features
+- **Pagination** - Efficient data loading with customizable page sizes
+- **Ordering** - Sort by date, views, title, etc.
+- **Filtering** - Advanced query parameters
+- **Swagger Documentation** - Interactive API testing
+- **Optimized Queries** - No N+1 issues with select_related/prefetch_related
+
+---
+
+## 🛠️ Tech Stack
+
+| Technology | Purpose | Version |
+|------------|---------|---------|
+| **Django** | Web Framework | 4.2.7 |
+| **Django REST Framework** | API Framework | 3.14.0 |
+| **PostgreSQL** | Database | 12+ |
+| **SimpleJWT** | JWT Authentication | 5.3.0 |
+| **drf-yasg** | API Documentation | 1.21.7 |
+| **BeautifulSoup4** | Web Scraping | 4.12.2 |
+| **django-filter** | Filtering | 23.3 |
+| **Pillow** | Image Processing | 10.1.0 |
+| **Gunicorn** | WSGI Server | 21.2.0 |
+
+---
+
+## 📦 Prerequisites
+
+Before you begin, ensure you have the following installed:
+
+- **Python** 3.8 or higher
+- **PostgreSQL** 12 or higher
+- **pip** (Python package manager)
+- **Git** (for version control)
+- **Virtual Environment** support
+
+---
+
+## 🚀 Installation
+
+### Step 1: Clone Repository
 
 ```bash
 git clone https://github.com/yourusername/mini-cms-api.git
 cd mini-cms-api
 ```
 
-### 2. Create Virtual Environment
+### Step 2: Create Virtual Environment
 
 ```bash
+# Create virtual environment
 python -m venv venv
 
-# Activate on Windows
+# Activate (Windows)
 venv\Scripts\activate
 
-# Activate on Linux/Mac
+# Activate (Linux/Mac)
 source venv/bin/activate
 ```
 
-### 3. Install Dependencies
+### Step 3: Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Setup PostgreSQL Database
+### Step 4: Setup PostgreSQL Database
 
 ```bash
-# Access PostgreSQL
+# Open PostgreSQL shell
 psql -U postgres
 
-# Create database and user
+# Run these SQL commands
 CREATE DATABASE mini_cms_db;
 CREATE USER cms_user WITH PASSWORD 'cms_password_123';
 GRANT ALL PRIVILEGES ON DATABASE mini_cms_db TO cms_user;
+
+# Connect and grant schema privileges
+\c mini_cms_db
+GRANT ALL ON SCHEMA public TO cms_user;
 \q
 ```
 
-### 5. Configure Environment Variables
+### Step 5: Configure Environment Variables
 
-Create a `.env` file in the project root:
+Create `.env` file in project root:
 
 ```env
 SECRET_KEY=your-secret-key-here-change-in-production
@@ -74,458 +173,645 @@ DB_HOST=localhost
 DB_PORT=5432
 ```
 
-### 6. Run Migrations
+### Step 6: Run Migrations
 
 ```bash
-python manage.py makemigrations
+python manage.py makemigrations accounts
+python manage.py makemigrations articles
+python manage.py makemigrations scraper
 python manage.py migrate
 ```
 
-### 7. Create Superuser
+### Step 7: Create Superuser (Optional)
 
 ```bash
 python manage.py createsuperuser
 ```
 
-### 8. Create Sample Data (Optional)
+### Step 8: Run Development Server
 
 ```bash
-python manage.py create_sample_data
+python manage.py runserver 127.0.0.1:1223
 ```
 
-This creates:
-- Admin user: `admin` / `admin123`
-- Author 1: `john_doe` / `author123`
-- Author 2: `jane_smith` / `author123`
-- 5 categories
-- 6 sample articles
+🎉 **Server is running!** Visit: `http://127.0.0.1:1223/`
 
-### 9. Run Development Server
+---
+
+## 🌐 API Endpoints
+
+### 🏠 Homepage & Documentation
+
+| Endpoint | Description | Access |
+|----------|-------------|--------|
+| **[http://127.0.0.1:1223/](http://127.0.0.1:1223/)** | API Root - Welcome page with all endpoints | Public |
+| **[http://127.0.0.1:1223/swagger/](http://127.0.0.1:1223/swagger/)** | Interactive Swagger UI Documentation | Public |
+| **[http://127.0.0.1:1223/redoc/](http://127.0.0.1:1223/redoc/)** | ReDoc API Documentation | Public |
+| **[http://127.0.0.1:1223/admin-panal/](http://127.0.0.1:1223/admin-panal/)** | Django Admin Panel | Admin Only |
+
+---
+
+### 🔐 Authentication Endpoints
+
+**Base URL:** `http://127.0.0.1:1223/api/auth/`
+
+| Method | Endpoint | Description | Auth Required |
+|--------|----------|-------------|---------------|
+| `POST` | `/register/` | Register new user (Admin/Author) | ❌ |
+| `POST` | `/login/` | Login and get JWT tokens | ❌ |
+| `POST` | `/token/refresh/` | Refresh access token | ❌ |
+| `GET` | `/profile/` | Get current user profile | ✅ |
+| `PATCH` | `/profile/` | Update user profile | ✅ |
+| `POST` | `/change-password/` | Change password | ✅ |
+| `POST` | `/logout/` | Logout (blacklist refresh token) | ✅ |
+
+#### Example: Register User
 
 ```bash
-python manage.py runserver
-```
-
-Access the API at `http://127.0.0.1:8000/`
-
-## 📚 API Documentation
-
-### Interactive Documentation
-
-- **Swagger UI**: http://127.0.0.1:8000/swagger/
-- **ReDoc**: http://127.0.0.1:8000/redoc/
-- **Admin Panel**: http://127.0.0.1:8000/admin/
-
-### Authentication Endpoints
-
-#### Register User
-```http
-POST /api/auth/register/
+POST http://127.0.0.1:1223/api/auth/register/
 Content-Type: application/json
 
 {
-    "username": "newuser",
-    "email": "user@example.com",
-    "password": "securepass123",
-    "password2": "securepass123",
-    "first_name": "John",
-    "last_name": "Doe",
-    "role": "author"
+  "username": "john_doe",
+  "email": "john@example.com",
+  "password": "SecurePass123",
+  "password2": "SecurePass123",
+  "first_name": "John",
+  "last_name": "Doe",
+  "role": "author"
 }
 ```
 
-#### Login
-```http
-POST /api/auth/login/
-Content-Type: application/json
+#### Example: Login
 
-{
-    "username": "admin",
-    "password": "admin123"
-}
-
-Response:
-{
-    "refresh": "eyJ0eXAiOiJKV1QiLCJhbGc...",
-    "access": "eyJ0eXAiOiJKV1QiLCJhbGc..."
-}
-```
-
-#### Refresh Token
-```http
-POST /api/auth/token/refresh/
-Content-Type: application/json
-
-{
-    "refresh": "your-refresh-token"
-}
-```
-
-#### Get Profile
-```http
-GET /api/auth/profile/
-Authorization: Bearer your-access-token
-```
-
-#### Update Profile
-```http
-PATCH /api/auth/profile/
-Authorization: Bearer your-access-token
-Content-Type: application/json
-
-{
-    "first_name": "Updated",
-    "bio": "My updated bio"
-}
-```
-
-#### Change Password
-```http
-POST /api/auth/change-password/
-Authorization: Bearer your-access-token
-Content-Type: application/json
-
-{
-    "old_password": "oldpass123",
-    "new_password": "newpass123"
-}
-```
-
-#### Logout
-```http
-POST /api/auth/logout/
-Authorization: Bearer your-access-token
-Content-Type: application/json
-
-{
-    "refresh_token": "your-refresh-token"
-}
-```
-
-### Category Endpoints
-
-#### List Categories
-```http
-GET /api/categories/
-```
-
-#### Create Category (Admin only)
-```http
-POST /api/categories/
-Authorization: Bearer your-access-token
-Content-Type: application/json
-
-{
-    "name": "New Category",
-    "description": "Category description"
-}
-```
-
-#### Get Category Detail
-```http
-GET /api/categories/{id}/
-```
-
-#### Update Category (Admin only)
-```http
-PUT /api/categories/{id}/
-Authorization: Bearer your-access-token
-Content-Type: application/json
-
-{
-    "name": "Updated Category",
-    "description": "Updated description"
-}
-```
-
-#### Delete Category (Admin only)
-```http
-DELETE /api/categories/{id}/
-Authorization: Bearer your-access-token
-```
-
-### Article Endpoints
-
-#### List Articles (Public - only published)
-```http
-GET /api/articles/
-
-Query Parameters:
-- page: Page number
-- page_size: Items per page (max 100)
-- status: draft or published
-- category: Category ID
-- author: Author ID
-- search: Search in title, description, content
-- ordering: -created_at, title, views_count, etc.
-```
-
-#### Get Published Articles
-```http
-GET /api/articles/published/
-```
-
-#### Get My Articles (Author)
-```http
-GET /api/articles/my_articles/
-Authorization: Bearer your-access-token
-```
-
-#### Get Draft Articles (Author/Admin)
-```http
-GET /api/articles/drafts/
-Authorization: Bearer your-access-token
-```
-
-#### Create Article (Authenticated)
-```http
-POST /api/articles/
-Authorization: Bearer your-access-token
-Content-Type: application/json
-
-{
-    "title": "My New Article",
-    "description": "Article description",
-    "content": "Full article content...",
-    "category": 1,
-    "status": "draft"
-}
-```
-
-#### Get Article Detail
-```http
-GET /api/articles/{id}/
-```
-
-#### Update Article (Author/Admin)
-```http
-PUT /api/articles/{id}/
-Authorization: Bearer your-access-token
-Content-Type: application/json
-
-{
-    "title": "Updated Title",
-    "description": "Updated description",
-    "content": "Updated content...",
-    "category": 1,
-    "status": "published"
-}
-```
-
-#### Delete Article (Author/Admin)
-```http
-DELETE /api/articles/{id}/
-Authorization: Bearer your-access-token
-```
-
-### Scraper Endpoints
-
-#### List Scraped Articles
-```http
-GET /api/scraper/articles/
-```
-
-#### Get Latest Scraped Articles
-```http
-GET /api/scraper/articles/latest/?limit=10
-```
-
-#### Trigger Scraping (Admin only)
-```http
-POST /api/scraper/articles/scrape/
-Authorization: Bearer your-access-token
-Content-Type: application/json
-
-{
-    "limit": 5
-}
-```
-
-## 🔧 Management Commands
-
-### Create Sample Data
 ```bash
-python manage.py create_sample_data
+POST http://127.0.0.1:1223/api/auth/login/
+Content-Type: application/json
+
+{
+  "username": "john_doe",
+  "password": "SecurePass123"
+}
+
+# Response:
+{
+  "access": "eyJ0eXAiOiJKV1QiLCJhbGc...",
+  "refresh": "eyJ0eXAiOiJKV1QiLCJhbGc..."
+}
 ```
 
-### Run Web Scraper
+---
+
+### 🗂️ Category Endpoints
+
+**Base URL:** `http://127.0.0.1:1223/api/categories/`
+
+| Method | Endpoint | Description | Permission |
+|--------|----------|-------------|------------|
+| `GET` | `/` | List all categories | Public |
+| `POST` | `/` | Create category | Admin Only |
+| `GET` | `/{id}/` | Get category details | Public |
+| `PUT` | `/{id}/` | Update category | Admin Only |
+| `PATCH` | `/{id}/` | Partial update category | Admin Only |
+| `DELETE` | `/{id}/` | Delete category | Admin Only |
+
+#### Example: Create Category
+
 ```bash
-python manage.py scrape_articles --limit 5
+POST http://127.0.0.1:1223/api/categories/
+Authorization: Bearer {access_token}
+Content-Type: application/json
+
+{
+  "name": "Technology",
+  "description": "All about technology and innovation"
+}
 ```
 
-## 🏗️ Project Structure
+---
+
+### 📝 Article Endpoints
+
+**Base URL:** `http://127.0.0.1:1223/api/articles/`
+
+| Method | Endpoint | Description | Permission |
+|--------|----------|-------------|------------|
+| `GET` | `/` | List published articles | Public |
+| `POST` | `/` | Create article | Authenticated |
+| `GET` | `/{id}/` | Get article details | Public (if published) |
+| `PUT` | `/{id}/` | Update article | Author/Admin |
+| `PATCH` | `/{id}/` | Partial update | Author/Admin |
+| `DELETE` | `/{id}/` | Delete article | Author/Admin |
+| `GET` | `/published/` | Get all published articles | Public |
+| `GET` | `/drafts/` | Get draft articles | Author/Admin |
+| `GET` | `/my_articles/` | Get user's own articles | Author |
+
+#### Query Parameters
+
+- `?page=1` - Page number
+- `?page_size=10` - Items per page (max 100)
+- `?status=published` - Filter by status
+- `?category=1` - Filter by category ID
+- `?author=1` - Filter by author ID
+- `?search=django` - Search in title/description/content
+- `?ordering=-created_at` - Order by field (prefix `-` for descending)
+
+#### Example: Create Article
+
+```bash
+POST http://127.0.0.1:1223/api/articles/
+Authorization: Bearer {access_token}
+Content-Type: application/json
+
+{
+  "title": "Getting Started with Django",
+  "description": "A comprehensive guide to Django",
+  "content": "Django is a high-level Python web framework...",
+  "category": 1,
+  "status": "published"
+}
+```
+
+#### Example: List Articles with Filters
+
+```bash
+GET http://127.0.0.1:1223/api/articles/?status=published&category=1&page=1&page_size=5&ordering=-views_count
+```
+
+---
+
+### 🌐 Web Scraper Endpoints (Bonus)
+
+**Base URL:** `http://127.0.0.1:1223/api/scraper/articles/`
+
+| Method | Endpoint | Description | Permission |
+|--------|----------|-------------|------------|
+| `GET` | `/` | List scraped articles | Public |
+| `GET` | `/latest/` | Get latest scraped articles | Public |
+| `POST` | `/scrape/` | Trigger article scraping | Admin Only |
+
+#### Example: Trigger Scraping
+
+```bash
+POST http://127.0.0.1:1223/api/scraper/articles/scrape/
+Authorization: Bearer {admin_access_token}
+Content-Type: application/json
+
+{
+  "limit": 5
+}
+
+# Response:
+{
+  "scraped_count": 5,
+  "articles": [...]
+}
+```
+
+---
+
+## ✅ Assessment Validation
+
+### Automated Testing Script
+
+Run the complete assessment test suite:
+
+```bash
+# Start server in one terminal
+python manage.py runserver 127.0.0.1:1223
+
+# Run tests in another terminal
+python test_assessment.py
+```
+
+### What the Test Script Validates
+
+The `test_assessment.py` script comprehensively tests all assignment requirements:
+
+#### ✅ Step 1: User Registration
+- Registers Admin user (`admin` / `Admin@123456`)
+- Registers Author user (`john_doe` / `Author@123456`)
+- Verifies users in database
+
+#### ✅ Step 2: JWT Authentication
+- Admin login with JWT tokens
+- Author login with JWT tokens
+- Token validation
+
+#### ✅ Step 3: Category Management
+- Admin creates 3 categories (Technology, Programming, Web Development)
+- Verifies categories in database
+- **Permission Test:** Author attempts to create category → 403 Forbidden ✅
+
+#### ✅ Step 4: Article Management
+- Admin creates published article
+- Author creates draft article
+- Author publishes their own article
+- **Permission Test:** Author attempts to edit admin's article → 403 Forbidden ✅
+
+#### ✅ Step 5: Public Access Control
+- Public users see ONLY published articles
+- Draft articles hidden from public
+- Database verification
+
+#### ✅ Step 6: Pagination
+- Tests pagination with page_size parameter
+- Verifies next/previous links
+
+#### ✅ Step 7: Web Scraping (Bonus)
+- **Permission Test:** Author attempts scraping → 403 Forbidden ✅
+- Admin triggers scraping
+- Verifies scraped articles in database
+
+### Expected Test Results
 
 ```
-mini_cms_project/
-├── mini_cms/              # Project settings
-│   ├── settings.py
-│   ├── urls.py
-│   └── wsgi.py
-├── accounts/              # User authentication app
-│   ├── models.py         # Custom User model
-│   ├── serializers.py    # User serializers
-│   ├── views.py          # Auth views
-│   └── urls.py
-├── articles/              # Articles management app
-│   ├── models.py         # Article and Category models
-│   ├── serializers.py    # Article serializers
-│   ├── views.py          # Article views
-│   ├── permissions.py    # Custom permissions
-│   ├── filters.py        # Filter classes
-│   ├── pagination.py     # Pagination classes
-│   └── urls.py
-├── scraper/               # Web scraping app
-│   ├── models.py         # ScrapedArticle model
-│   ├── scraper.py        # Scraping logic
-│   ├── views.py          # Scraper views
-│   └── urls.py
-├── manage.py
-├── requirements.txt
-├── .env
-├── .gitignore
-└── README.md
+============================================================
+Assessment Results
+============================================================
+
+Total Steps: 13
+Passed: 13 ✅
+Failed: 0
+Success Rate: 100.0%
+
+🎉 ALL ASSESSMENT REQUIREMENTS MET! 🎉
+Your CMS API is fully compliant with the assignment!
 ```
 
-## 📊 Database Schema
+### Manual Testing via Swagger UI
 
-### Users Table
-- id (PK)
-- username (unique)
-- email
-- password
-- role (admin/author)
-- first_name, last_name
-- bio
-- profile_picture
-- created_at, updated_at
+Visit **[http://127.0.0.1:1223/swagger/](http://127.0.0.1:1223/swagger/)** for interactive API testing:
 
-### Categories Table
-- id (PK)
-- name (unique)
-- slug (unique)
-- description
-- created_at, updated_at
+1. **Test Authentication**
+   - Register user → `/api/auth/register/`
+   - Login → `/api/auth/login/` (copy access token)
+   - Click "Authorize" button, paste token: `Bearer {your_token}`
 
-### Articles Table
-- id (PK)
-- title
-- slug (unique)
-- description
-- content
-- category_id (FK)
-- author_id (FK)
-- status (draft/published)
-- featured_image
-- views_count
-- created_at, updated_at
+2. **Test Category Management**
+   - Create category (requires Admin token)
+   - List categories
+   - Author token should get 403 on POST
 
-### Scraped Articles Table
-- id (PK)
-- title
-- url (unique)
-- source
-- scraped_at
+3. **Test Article Management**
+   - Create article (any authenticated user)
+   - List articles (public)
+   - Update own article
+   - Try updating others' article (should fail)
 
-## 🔐 Permissions
+4. **Test Permissions**
+   - Public access → Only published articles
+   - Author access → Own articles + published
+   - Admin access → All articles
 
-### Admin
-- Full access to all features
-- Can create, update, delete categories
-- Can create, update, delete any article
-- Can trigger web scraping
+---
 
-### Author
-- Can create articles
-- Can update/delete only their own articles
-- Can view all published articles
-- Can view their own draft articles
+## 🗄️ Database Schema
 
-### Public/Unauthenticated
-- Can view published articles only
-- Can view categories
-- Cannot create, update, or delete content
+### Users Table (`users`)
+
+```sql
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(150) UNIQUE NOT NULL,
+    email VARCHAR(254) UNIQUE NOT NULL,
+    password VARCHAR(128) NOT NULL,
+    role VARCHAR(10) NOT NULL,  -- 'admin' or 'author'
+    first_name VARCHAR(150),
+    last_name VARCHAR(150),
+    bio TEXT,
+    profile_picture VARCHAR(100),
+    is_active BOOLEAN DEFAULT TRUE,
+    is_staff BOOLEAN DEFAULT FALSE,
+    is_superuser BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
+);
+```
+
+### Categories Table (`categories`)
+
+```sql
+CREATE TABLE categories (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) UNIQUE NOT NULL,
+    slug VARCHAR(100) UNIQUE NOT NULL,
+    description TEXT,
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
+);
+```
+
+### Articles Table (`articles`)
+
+```sql
+CREATE TABLE articles (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    slug VARCHAR(255) UNIQUE NOT NULL,
+    description TEXT NOT NULL,
+    content TEXT NOT NULL,
+    category_id INTEGER REFERENCES categories(id),
+    author_id INTEGER REFERENCES users(id),
+    status VARCHAR(10) DEFAULT 'draft',  -- 'draft' or 'published'
+    featured_image VARCHAR(100),
+    views_count INTEGER DEFAULT 0,
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW(),
+    INDEX idx_created_at (created_at DESC),
+    INDEX idx_status (status),
+    INDEX idx_author (author_id)
+);
+```
+
+### Scraped Articles Table (`scraper_scrappedarticle`)
+
+```sql
+CREATE TABLE scraper_scrappedarticle (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(500) NOT NULL,
+    source_url VARCHAR(500) UNIQUE NOT NULL,
+    source VARCHAR(200),
+    scraped_at TIMESTAMP DEFAULT NOW()
+);
+```
+
+### Entity Relationship Diagram
+
+```
+┌──────────────┐         ┌──────────────┐
+│    Users     │         │  Categories  │
+├──────────────┤         ├──────────────┤
+│ id (PK)      │         │ id (PK)      │
+│ username     │         │ name         │
+│ email        │         │ slug         │
+│ password     │         │ description  │
+│ role         │         │ created_at   │
+│ first_name   │         └──────────────┘
+│ last_name    │                │
+│ bio          │                │
+│ created_at   │                │
+└──────────────┘                │
+       │                        │
+       │ 1:N                    │ 1:N
+       │                        │
+       │    ┌──────────────┐    │
+       └───▶│   Articles   │◀───┘
+            ├──────────────┤
+            │ id (PK)      │
+            │ title        │
+            │ slug         │
+            │ description  │
+            │ content      │
+            │ category_id  │ (FK)
+            │ author_id    │ (FK)
+            │ status       │
+            │ views_count  │
+            │ created_at   │
+            └──────────────┘
+```
+
+---
+
+## 🔐 Authentication
+
+### JWT Token Flow
+
+```
+┌─────────┐                                    ┌─────────┐
+│ Client  │                                    │  Server │
+└────┬────┘                                    └────┬────┘
+     │                                              │
+     │  POST /api/auth/login/                      │
+     │  { username, password }                     │
+     │─────────────────────────────────────────────▶│
+     │                                              │
+     │                                              │ Validate credentials
+     │                                              │
+     │  { access, refresh }                        │
+     │◀─────────────────────────────────────────────│
+     │                                              │
+     │  GET /api/articles/                         │
+     │  Authorization: Bearer {access}             │
+     │─────────────────────────────────────────────▶│
+     │                                              │
+     │                                              │ Verify token
+     │                                              │
+     │  { articles: [...] }                        │
+     │◀─────────────────────────────────────────────│
+     │                                              │
+     │  POST /api/auth/token/refresh/              │
+     │  { refresh }                                 │
+     │─────────────────────────────────────────────▶│
+     │                                              │
+     │  { access }                                  │
+     │◀─────────────────────────────────────────────│
+     │                                              │
+```
+
+### Token Configuration
+
+- **Access Token Lifetime:** 60 minutes
+- **Refresh Token Lifetime:** 7 days
+- **Algorithm:** HS256
+- **Blacklist:** Enabled for logout
+
+---
+
+## 🛡️ Permissions
+
+### Role-Based Access Control
+
+| Feature | Public | Author | Admin |
+|---------|--------|--------|-------|
+| **Authentication** |
+| Register | ✅ | ✅ | ✅ |
+| Login | ✅ | ✅ | ✅ |
+| View Profile | ❌ | ✅ | ✅ |
+| **Categories** |
+| List | ✅ | ✅ | ✅ |
+| Create | ❌ | ❌ | ✅ |
+| Update | ❌ | ❌ | ✅ |
+| Delete | ❌ | ❌ | ✅ |
+| **Articles** |
+| List Published | ✅ | ✅ | ✅ |
+| View Published | ✅ | ✅ | ✅ |
+| Create | ❌ | ✅ | ✅ |
+| Update Own | ❌ | ✅ | ✅ |
+| Update Any | ❌ | ❌ | ✅ |
+| Delete Own | ❌ | ✅ | ✅ |
+| Delete Any | ❌ | ❌ | ✅ |
+| View Drafts | ❌ | Own Only | All |
+| **Web Scraping** |
+| View Scraped | ✅ | ✅ | ✅ |
+| Trigger Scrape | ❌ | ❌ | ✅ |
+
+---
 
 ## 🧪 Testing
 
-Run tests with:
+### Run Unit Tests
+
 ```bash
 python manage.py test
 ```
 
-## 📝 API Response Format
+### Test Coverage
 
-### Success Response
-```json
-{
-    "id": 1,
-    "title": "Article Title",
-    "description": "Article description",
-    "status": "published",
-    "created_at": "2024-01-01T12:00:00Z"
-}
+```bash
+pip install coverage
+coverage run --source='.' manage.py test
+coverage report
+coverage html  # Generate HTML report
 ```
 
-### Error Response
-```json
-{
-    "detail": "Error message",
-    "errors": {
-        "field_name": ["Error description"]
-    }
-}
-```
+### Manual API Testing
 
-### Paginated Response
-```json
-{
-    "count": 50,
-    "next": "http://api.example.com/articles/?page=2",
-    "previous": null,
-    "results": [...]
-}
-```
+Use the provided Postman collection or Swagger UI:
+
+1. Import `postman_collection.json`
+2. Set environment variables
+3. Run authentication requests
+4. Test all endpoints
+
+---
 
 ## 🚀 Deployment
 
-### Environment Variables for Production
+### Production Checklist
+
+- [ ] Set `DEBUG=False` in production
+- [ ] Use environment variables for secrets
+- [ ] Configure allowed hosts
+- [ ] Setup HTTPS/SSL certificates
+- [ ] Use production database credentials
+- [ ] Configure CORS headers
+- [ ] Setup logging and monitoring
+- [ ] Enable database backups
+- [ ] Configure static/media file serving
+- [ ] Setup caching (Redis)
+
+### Environment Variables (Production)
+
 ```env
+SECRET_KEY=your-production-secret-key-min-50-chars
 DEBUG=False
-SECRET_KEY=your-production-secret-key
-ALLOWED_HOSTS=yourdomain.com
+ALLOWED_HOSTS=yourdomain.com,www.yourdomain.com
 DB_NAME=production_db
 DB_USER=production_user
-DB_PASSWORD=strong-password
+DB_PASSWORD=strong-production-password
+DB_HOST=your-db-host.com
+DB_PORT=5432
+```
+
+### Deploy with Gunicorn
+
+```bash
+pip install gunicorn
+gunicorn mini_cms.wsgi:application --bind 0.0.0.0:8000 --workers 3
 ```
 
 ### Collect Static Files
+
 ```bash
-python manage.py collectstatic
+python manage.py collectstatic --noinput
 ```
 
-### Run with Gunicorn
+---
+
+## 📊 Performance Optimization
+
+### Database Query Optimization
+
+✅ **No N+1 Queries**
+- All article queries use `select_related('author', 'category')`
+- Category queries use `prefetch_related('articles')`
+
+✅ **Indexing**
+- Indexes on `created_at`, `status`, `author_id`
+- Unique indexes on `slug` fields
+
+✅ **Pagination**
+- Configurable page sizes
+- Efficient offset pagination
+
+---
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+#### Database Connection Failed
 ```bash
-pip install gunicorn
-gunicorn mini_cms.wsgi:application --bind 0.0.0.0:8000
+# Check PostgreSQL is running
+sudo systemctl status postgresql  # Linux
+# Services → postgresql  # Windows
+
+# Verify credentials
+psql -U cms_user -d mini_cms_db -W
 ```
 
-## 🤝 Contributing
+#### Port Already in Use
+```bash
+# Find process
+netstat -ano | findstr :1223  # Windows
+lsof -i :1223  # Linux/Mac
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+# Kill process
+taskkill /PID <PID> /F  # Windows
+kill -9 <PID>  # Linux/Mac
+```
 
-## 📄 License
+#### Migration Errors
+```bash
+# Reset migrations
+python manage.py migrate --fake accounts zero
+python manage.py migrate --fake articles zero
 
-This project is licensed under the MIT License.
+# Delete migration files (keep __init__.py)
+# Recreate
+python manage.py makemigrations
+python manage.py migrate
+```
+
+---
+
+## 📚 Additional Resources
+
+- [Django Documentation](https://docs.djangoproject.com/)
+- [Django REST Framework](https://www.django-rest-framework.org/)
+- [JWT Authentication](https://django-rest-framework-simplejwt.readthedocs.io/)
+- [PostgreSQL Documentation](https://www.postgresql.org/docs/)
+
+---
 
 ## 👨‍💻 Author
 
-Your Name - [GitHub Profile](https://github.com/yourusername)
+**Your Name**
+- GitHub: [@yourusername](https://github.com/yourusername)
+- LinkedIn: [Your Profile](https://linkedin.com/in/yourprofile)
+- Email: your.email@example.com
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
 
 ## 🙏 Acknowledgments
 
-- Django REST Framework documentation
-- PostgreSQL documentation
-- BeautifulSoup documentation
+- Django REST Framework team for excellent documentation
+- PostgreSQL community for robust database system
+- All contributors and reviewers
+
+---
+
+<div align="center">
+
+**⭐ Star this repository if you found it helpful!**
+
+Made with ❤️ using Django REST Framework
+
+</div>
