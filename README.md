@@ -89,6 +89,7 @@ This project fulfills all requirements of the Backend Engineering Test Assignmen
 ---
 
 
+
 ## 📸 Screenshots
 
 <div align="center">
@@ -96,6 +97,10 @@ This project fulfills all requirements of the Backend Engineering Test Assignmen
 ### API Root - Welcome Page
 ![API Root](https://github.com/engrmumtazali0112/Mini-Content-Management-System-CMS-API/blob/main/Demo/home.JPG?raw=true)
 *Clean and organized API navigation with all available endpoints*
+
+### Swagger UI - Complete API Documentation
+![Swagger API](https://github.com/engrmumtazali0112/Mini-Content-Management-System-CMS-API/blob/main/Demo/AllApi.JPG?raw=true)
+*Interactive Swagger documentation showing all API endpoints with color-coded HTTP methods (GET, POST, PUT, PATCH, DELETE)*
 
 ### Admin - All Draft Articles
 ![Draft Articles](https://github.com/engrmumtazali0112/Mini-Content-Management-System-CMS-API/blob/main/Demo/AdminSeeAllDraps.JPG?raw=true)
@@ -116,7 +121,6 @@ This project fulfills all requirements of the Backend Engineering Test Assignmen
 </div>
 
 ---
-
 
 
 ## 🛠️ Tech Stack
