@@ -10,16 +10,18 @@
 
 **A robust, production-ready REST API built with Django REST Framework**
 
-[Features](#-features) • [Quick Start](#-quick-start) • [API Documentation](#-api-endpoints) • [Assessment](#-assessment-validation) • [Architecture](#-architecture)
+[Features](#-features) • [Quick Start](#-quick-start) • [API Documentation](#-api-endpoints) • [Screenshots](#-screenshots) • [Architecture](#-architecture)
 
 </div>
 
 ---
 
+
 ## 📋 Table of Contents
 
 - [Overview](#-overview)
 - [Features](#-features)
+- [Screenshots](#-screenshots)
 - [Tech Stack](#-tech-stack)
 - [Prerequisites](#-prerequisites)
 - [Installation](#-installation)
@@ -37,7 +39,7 @@
 
 Mini CMS is a feature-rich Content Management System API designed for managing articles, categories, and users with role-based access control. Built following Django REST Framework best practices, it provides secure JWT authentication, optimized database queries, and comprehensive API documentation.
 
-### Backend Engineering Assessment
+### 🎖️ Backend Engineering Assessment
 
 This project fulfills all requirements of the Backend Engineering Test Assignment:
 - ✅ JWT-based authentication with Admin/Author roles
@@ -73,7 +75,7 @@ This project fulfills all requirements of the Backend Engineering Test Assignmen
 - **Article Counting** - Track published articles per category
 
 ### 🌐 Web Scraping (Bonus)
-- **Automated Article Scraping** - Fetch latest tech articles
+- **Automated Article Scraping** - Fetch latest tech articles from Hacker News
 - **Database Integration** - Store scraped content
 - **Admin-Only Access** - Secure scraping operations
 
@@ -85,6 +87,37 @@ This project fulfills all requirements of the Backend Engineering Test Assignmen
 - **Optimized Queries** - No N+1 issues with select_related/prefetch_related
 
 ---
+
+
+## 📸 Screenshots
+
+<div align="center">
+
+### API Root - Welcome Page
+![API Root](https://github.com/engrmumtazali0112/Mini-Content-Management-System-CMS-API/blob/main/Demo/home.JPG?raw=true)
+*Clean and organized API navigation with all available endpoints*
+
+### Admin - All Draft Articles
+![Draft Articles](https://github.com/engrmumtazali0112/Mini-Content-Management-System-CMS-API/blob/main/Demo/AdminSeeAllDraps.JPG?raw=true)
+*Admin can view all draft articles from all authors with complete metadata*
+
+### Author - Draft Articles Endpoint
+![Author Drafts](https://github.com/engrmumtazali0112/Mini-Content-Management-System-CMS-API/blob/main/Demo/AuthorDrapsArticle.JPG?raw=true)
+*Authors can view their own draft articles with category and author information*
+
+### Author - My Articles Endpoint
+![My Articles](https://github.com/engrmumtazali0112/Mini-Content-Management-System-CMS-API/blob/main/Demo/AuthorMyAllArticle.JPG?raw=true)
+*Authors can view and manage all their own articles (drafts and published)*
+
+### Web Scraper - Latest Articles
+![Web Scraper](https://github.com/engrmumtazali0112/Mini-Content-Management-System-CMS-API/blob/main/Demo/ScrapLatestArticle.JPG?raw=true)
+*Automated web scraping feature fetching latest tech articles from Hacker News*
+
+</div>
+
+---
+
+
 
 ## 🛠️ Tech Stack
 
@@ -795,7 +828,7 @@ python manage.py migrate
 [![Email](https://img.shields.io/badge/Email-engrmumtazali01@gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:engrmumtazali01@gmail.com)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/mumtazali12)
 
-**Full-Stack Developer | Fitness Enthusiast | Open Source Contributor**
+**Full-Stack Developer | Backend Specialist | Open Source Contributor**
 
 </div>
 
@@ -807,23 +840,11 @@ MIT License
 
 Copyright (c) 2025 Mumtaz Ali
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ---
 
